@@ -7,4 +7,5 @@ import java.util.List;
 public interface WordService {
     public Word saveWord(Word word);
     public List<Word> getAllWords();
+    public Character getLetterByPosition(Word word, int position);
 }

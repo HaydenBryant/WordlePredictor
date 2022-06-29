@@ -21,4 +21,9 @@ public class IWordService implements WordService{
     public List<Word> getAllWords() {
         return wordRepo.findAll();
     }
+
+    @Override
+    public Character getLetterByPosition(Word word, int position) {
+        return word.getWord().charAt(position);
+    }
 }
