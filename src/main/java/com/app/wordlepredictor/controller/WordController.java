@@ -26,4 +26,6 @@ public class WordController {
 
     @GetMapping("/getLetter")
     public Character getLetterByPosition(@RequestBody Word word, int position){return wordService.getLetterByPosition(word, position);}
+
+
 }
