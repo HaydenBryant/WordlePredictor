@@ -1,14 +1,25 @@
 package com.app.wordlepredictor.util;
 
+import com.app.wordlepredictor.model.Word;
+import com.app.wordlepredictor.repository.WordRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class WordFinder {
-    public static List<String> parser(List<String> dbList,
-                                         List<Character> presentLetters,
-                                         HashMap<Integer, Character> letterLocation,
-                                         List<Character> nonPresentLetters){
+
+    @Autowired
+    private WordRepo wordRepo;
+
+    public List<Word> getAllWords() {
+        return wordRepo.findAll();
+    }
+
+    public List<String> parser(List<Character> presentLetters,
+                               HashMap<Integer, Character> letterLocation,
+                               List<Character> nonPresentLetters){
 
         List<String> possibleWords = new ArrayList<>();
         String nonPresentLetRegex = ".*[";
@@ -23,8 +34,8 @@ public class WordFinder {
         }
         presentLetRegex += " ].*";
 
-        for(String word : dbList){
-            //could be string utils from apache but using regex
+        for(Word dictWord : getAllWords()){
+            String word = dictWord.getWord();
             if(word.matches(nonPresentLetRegex)){
                 continue;
             }
